@@ -1,10 +1,12 @@
 <template>
   <el-form>
-    <el-form-item label="Name">
-      <el-input v-model.trim="user.name" />
+    <el-form-item label="Old Password">
+      <el-input />
+    </el-form-item><el-form-item label="New Password">
+      <el-input />
     </el-form-item>
-    <el-form-item label="Email">
-      <el-input v-model.trim="user.email" />
+    <el-form-item label="Confirm New Password">
+      <el-input />
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submit">Update</el-button>
@@ -20,7 +22,8 @@ export default {
       default: () => {
         return {
           name: '',
-          email: ''
+          email: '',
+          password: ''
         }
       }
     }

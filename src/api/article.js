@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function fetchList(title) {
   return request({
-    url: '/vue-element-admin/article/list',
+    url: '/document/list',
     method: 'get',
-    params: query
+    params: {title}
   })
 }
 
@@ -16,26 +16,50 @@ export function fetchArticle(id) {
   })
 }
 
-export function fetchPv(pv) {
+export function createDocument(data) {
   return request({
-    url: '/vue-element-admin/article/pv',
+    url: '/document/create',
+    method: 'post',
+    data
+  })
+}
+
+export function updateDocument(data) {
+  return request({
+    url: '/document/update',
+    method: 'post',
+    data
+  })
+}
+
+export function deleteDocument(data) {
+  return request({
+    url: '/document/delete',
+    method: 'post',
+    data
+  })
+}
+
+export function uploadDocument(file) {
+  return request({
+    url: '/pdf/upload',
+    method: 'post',
+    file
+  })
+}
+
+export function getPdf(pdfId) {
+  return request({
+    url: '/pdf/get',
     method: 'get',
-    params: { pv }
+    params: {pdfId}
   })
 }
 
-export function createArticle(data) {
+export function deletePdf(pdfId) {
   return request({
-    url: '/vue-element-admin/article/create',
+    url: '/pdf/delete',
     method: 'post',
-    data
-  })
-}
-
-export function updateArticle(data) {
-  return request({
-    url: '/vue-element-admin/article/update',
-    method: 'post',
-    data
+    params: {pdfId}
   })
 }

@@ -8,7 +8,7 @@ describe('Utils:validate', () => {
   it('validURL', () => {
     expect(validURL('https://github.com/PanJiaChen/vue-element-admin')).toBe(true)
     expect(validURL('http://github.com/PanJiaChen/vue-element-admin')).toBe(true)
-    expect(validURL('github.com/PanJiaChen/vue-element-admin')).toBe(false)
+    expect(validURL('github.com/PanJiaChen/phd-sharing-front')).toBe(false)
   })
   it('validLowerCase', () => {
     expect(validLowerCase('abc')).toBe(true)
