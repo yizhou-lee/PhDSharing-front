@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
       <div style="text-align: center; margin-bottom: 10px">
-        <el-image style="width: 150px; height: 150px;" :src=logo></el-image>
+        <el-image style="width: 150px; height: 150px;" :src="logo" />
       </div>
       <div class="title-container">
         <h3 class="title">Login Your Account</h3>

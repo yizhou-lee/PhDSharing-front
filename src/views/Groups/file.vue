@@ -7,7 +7,8 @@
       :before-upload="handleUpload"
       :on-success="handleSuccess"
       :show-file-list="false"
-      :file-list="fileList">
+      :file-list="fileList"
+    >
       <el-button size="medium" type="primary" icon="el-icon-upload2">Upload</el-button>
       <div slot="tip" class="el-upload__tip">only pdf/doc file is accepted ( maximum size: 50MB )</div>
     </el-upload>
@@ -22,8 +23,8 @@
         <template slot-scope="{row}">
           <el-input
             v-if="row.index === rowIndex && showEdit"
-            v-model="temp.fileName"
             ref="saveNameInput"
+            v-model="temp.fileName"
             maxlength="50"
             show-word-limit
             @blur="handleInputConfirm(row)"
@@ -43,12 +44,12 @@
           <span>{{ row.uploader }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Actions"  width="150" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" width="150" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" v-if="row.uploader === $store.getters.name || $store.getters.roles[0] !== 'student'" @click="showNameInput(row)">
+          <el-button v-if="row.uploader === $store.getters.name || $store.getters.roles[0] !== 'student'" type="primary" size="mini" @click="showNameInput(row)">
             Rename
           </el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(row,$index)" v-if="row.uploader === $store.getters.name || $store.getters.roles[0] !== 'student'">
+          <el-button v-if="row.uploader === $store.getters.name || $store.getters.roles[0] !== 'student'" size="mini" type="danger" @click="handleDelete(row,$index)">
             Delete
           </el-button>
         </template>
@@ -61,7 +62,7 @@
 import { deleteFile, getFile, getFileInfo, updateName } from '@/api/group'
 
 export default {
-  name: 'file',
+  name: 'File',
   data() {
     return {
       temp: {
@@ -75,14 +76,14 @@ export default {
       fileList: [],
       tableData: [],
       showEdit: false,
-      rowIndex: -1,
+      rowIndex: -1
     }
   },
   created() {
     this.fetchFile()
   },
   methods: {
-    tableRowClassName({row, rowIndex}) {
+    tableRowClassName({ row, rowIndex }) {
       row.index = rowIndex
     },
     resetTemp() {
@@ -96,7 +97,7 @@ export default {
       }
     },
     fetchFile() {
-      const groupId = this.$route.params.id;
+      const groupId = this.$route.params.id
       getFile(groupId).then(response => {
         this.tableData = response.data.items
       })
@@ -105,16 +106,16 @@ export default {
     handleUpload(file) {
       return new Promise((resolve, reject) => {
         const isLt50M = file.size / 1024 / 1024 < 50
-        if(!isLt50M) {
-          this.$message.warning('The maximum upload file size is 50MB');
-          return reject(false);
+        if (!isLt50M) {
+          this.$message.warning('The maximum upload file size is 50MB')
+          return reject(false)
         }
-        return resolve(true);
+        return resolve(true)
       })
     },
     handleSuccess(file) {
-      const fileId = file.data.id;
-      const groupId = this.$route.params.id;
+      const fileId = file.data.id
+      const groupId = this.$route.params.id
       getFileInfo(fileId, groupId).then(response => {
         this.temp = response.data
         this.tableData.push(this.temp)
@@ -130,23 +131,23 @@ export default {
     showNameInput(row) {
       this.rowIndex = row.index
       this.resetTemp()
-      this.showEdit = true;
+      this.showEdit = true
       this.$nextTick(_ => {
         this.$refs.saveNameInput.focus()
-      });
+      })
     },
     handleInputConfirm(row) {
-      let nameValue = this.temp.fileName;
-      if(nameValue === '' || nameValue === undefined || nameValue === null) {
-        this.showEdit = false;
+      const nameValue = this.temp.fileName
+      if (nameValue === '' || nameValue === undefined || nameValue === null) {
+        this.showEdit = false
       } else {
         this.temp = Object.assign({}, row)
-        let suffix = row.fileName.replace(/.+\./, ".").toLowerCase();
+        const suffix = row.fileName.replace(/.+\./, '.').toLowerCase()
         this.temp.fileName = nameValue + suffix
         updateName(this.temp).then(() => {
           const index = this.tableData.findIndex(v => v.id === this.temp.id)
           this.tableData.splice(index, 1, this.temp)
-          this.showEdit = false;
+          this.showEdit = false
           this.$notify({
             title: 'Success',
             message: 'Update Successfully',
@@ -170,7 +171,7 @@ export default {
           this.tableData.splice(index, 1)
         })
       })
-    },
+    }
   }
 }
 </script>

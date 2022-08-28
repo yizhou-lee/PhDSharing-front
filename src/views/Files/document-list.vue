@@ -76,34 +76,35 @@
             accept=".pdf"
             :limit="1"
             :on-exceed="handleExceed"
-            :file-list="fileList">
+            :file-list="fileList"
+          >
             <el-button size="small" type="primary">Choose File</el-button>
             <div slot="tip" class="el-upload__tip">only one PDF file is accepted ( maximum size: 50MB )</div>
           </el-upload>
         </el-form-item>
         <el-form-item label="URL" prop="urlPath">
-<!--          <el-input v-model="temp.urlPath" />-->
-<!--          <el-link href="https://element.eleme.io" target="_blank">https://element.eleme.io</el-link>-->
+          <!--          <el-input v-model="temp.urlPath" />-->
+          <!--          <el-link href="https://element.eleme.io" target="_blank">https://element.eleme.io</el-link>-->
           <el-tag
-            :key="tag"
             v-for="tag in dynamicTags"
+            :key="tag"
             size="large"
             closable
             :disable-transitions="true"
-            @close="handleClose(tag)">
-            <el-link :href="tag" target="_blank" :underline="false">{{tag.length>30?tag.substring(0,29)+'...':tag}}</el-link>
+            @close="handleClose(tag)"
+          >
+            <el-link :href="tag" target="_blank" :underline="false">{{ tag.length>30?tag.substring(0,29)+'...':tag }}</el-link>
           </el-tag>
           <el-input
-            class="input-new-tag"
             v-if="inputVisible"
-            v-model="temp.urlPath"
             ref="saveTagInput"
+            v-model="temp.urlPath"
+            class="input-new-tag"
             size="small"
             @keyup.enter.native="handleInputConfirm"
             @blur="handleInputConfirm"
-          >
-          </el-input>
-          <el-button v-else class="button-new-tag" size="small" @click="showInput" :style="{ display: buttonVisible }">+ New URL</el-button>
+          />
+          <el-button v-else class="button-new-tag" size="small" :style="{ display: buttonVisible }" @click="showInput">+ New URL</el-button>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -131,12 +132,12 @@ export default {
   data() {
     const checkYear = (rule, value, cb) => {
       const regYear = /^\d{4}$/
-      if(value === '' || value === undefined || value === null){
+      if (value === '' || value === undefined || value === null) {
         return cb()
-      }else{
-        if(!regYear.test(value)){
+      } else {
+        if (!regYear.test(value)) {
           cb(new Error('Please enter the correct year'))
-        }else{
+        } else {
           return cb()
         }
       }
@@ -144,12 +145,12 @@ export default {
 
     const checkUrl = (rule, value, cb) => {
       const regUrl = /(http|https):\/\/([\w.]+\/?)\S*/
-      if(value === '' || value === undefined || value === null){
+      if (value === '' || value === undefined || value === null) {
         return cb()
-      }else{
-        if(!regUrl.test(value)){
+      } else {
+        if (!regUrl.test(value)) {
           cb(new Error('Please enter the correct url'))
-        }else{
+        } else {
           return cb()
         }
       }
@@ -163,7 +164,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        title: '',
+        title: ''
       },
       temp: {
         id: undefined,
@@ -173,7 +174,7 @@ export default {
         addedDate: '',
         type: '',
         fileId: 0,
-        urlPath: '',
+        urlPath: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -185,13 +186,13 @@ export default {
       rules: {
         title: [
           { required: true, message: 'Title is required', trigger: 'blur' },
-          { min: 0, max: 100, message: 'Title is too long', trigger: 'blur'}
+          { min: 0, max: 100, message: 'Title is too long', trigger: 'blur' }
         ],
         authors: [{ min: 0, max: 50, message: 'Input is too long', trigger: 'blur' }],
-        year: [{validator: checkYear, trigger: 'blur'}],
-        urlPath : [
-          {validator: checkUrl, trigger: 'blur'},
-          {max: 2048, message: 'Input is too long', trigger: 'blur'}
+        year: [{ validator: checkYear, trigger: 'blur' }],
+        urlPath: [
+          { validator: checkUrl, trigger: 'blur' },
+          { max: 2048, message: 'Input is too long', trigger: 'blur' }
         ]
       },
       downloadLoading: false,
@@ -202,7 +203,7 @@ export default {
       fileList: [],
       file: {
         name: '',
-        url:''
+        url: ''
       }
     }
   },
@@ -245,7 +246,7 @@ export default {
         addedDate: '',
         type: '',
         fileId: 0,
-        urlPath: '',
+        urlPath: ''
       }
       this.dynamicTags = []
     },
@@ -254,7 +255,7 @@ export default {
       this.fileList = []
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
-      this.buttonVisible = '';
+      this.buttonVisible = ''
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -288,18 +289,18 @@ export default {
           this.file.url = response.data.pdfUrl
           this.fileList = [this.file]
         })
-      }else{
+      } else {
         this.fileList = []
       }
       this.buttonVisible = 'none'
-      //this.temp.addedDate = new Date(this.temp.addedDate)
+      // this.temp.addedDate = new Date(this.temp.addedDate)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.dynamicTags = []
       if (this.temp.urlPath !== '') {
-        this.dynamicTags.push(this.temp.urlPath);
-      }else {
-        this.buttonVisible = '';
+        this.dynamicTags.push(this.temp.urlPath)
+      } else {
+        this.buttonVisible = ''
       }
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
@@ -351,68 +352,68 @@ export default {
       }))
     },
     handleClose(tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      this.buttonVisible = '';
-      this.temp.urlPath = '';
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
+      this.buttonVisible = ''
+      this.temp.urlPath = ''
     },
     showInput() {
-      this.inputVisible = true;
+      this.inputVisible = true
       this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
     },
     handleInputConfirm() {
-      let urlValue = this.temp.urlPath;
-      this.$refs.dataForm.validateField("urlPath", (errMsg) => {
-        if(!errMsg) {
-          if(urlValue === '' || urlValue === undefined || urlValue === null) {
-            this.inputVisible = false;
+      const urlValue = this.temp.urlPath
+      this.$refs.dataForm.validateField('urlPath', (errMsg) => {
+        if (!errMsg) {
+          if (urlValue === '' || urlValue === undefined || urlValue === null) {
+            this.inputVisible = false
           } else {
-            this.dynamicTags.push(urlValue);
-            this.buttonVisible = 'none';
-            this.inputVisible = false;
+            this.dynamicTags.push(urlValue)
+            this.buttonVisible = 'none'
+            this.inputVisible = false
           }
-        }else {
-          return false;
+        } else {
+          return false
         }
       })
     },
     handleUpload(file) {
       return new Promise((resolve, reject) => {
         const isLt50M = file.size / 1024 / 1024 < 50
-        if(!isLt50M) {
-          this.$message.warning('The maximum upload file size is 50MB');
-          return reject(false);
+        if (!isLt50M) {
+          this.$message.warning('The maximum upload file size is 50MB')
+          return reject(false)
         }
-        return resolve(true);
+        return resolve(true)
       })
     },
     handleSuccess(file) {
-      this.temp.fileId = file.data.id;
+      this.temp.fileId = file.data.id
       getPdf(this.temp.fileId).then(response => {
         this.file.name = response.data.pdfName
         this.file.url = response.data.pdfUrl
       })
     },
     handleRemove(file) {
-      const pdfId = this.temp.fileId;
-      if(pdfId !== 0) {
+      const pdfId = this.temp.fileId
+      if (pdfId !== 0) {
         deletePdf(this.temp.fileId).then(() => {
-          this.temp.fileId = 0;
+          this.temp.fileId = 0
           const index = this.list.findIndex(v => v.id === this.temp.id)
           this.list.splice(index, 1, this.temp)
         })
       }
     },
     handleExceed(files, fileList) {
-      this.$message.warning('The current limit is 1 file, please delete it and continue uploading');
+      this.$message.warning('The current limit is 1 file, please delete it and continue uploading')
     },
     handlePreview() {
-      window.open(this.file.url);
+      window.open(this.file.url)
     },
     beforeRemove(file) {
-      if (file && file.status==="success") {
-        return this.$confirm(`Are you sure you want to delete ${ file.name }？`);
+      if (file && file.status === 'success') {
+        return this.$confirm(`Are you sure you want to delete ${file.name}？`)
       }
     }
   }

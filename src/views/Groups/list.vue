@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="filter-container">
       <router-link to="/Groups/add" class="link-type">
-        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-plus" v-if="$store.getters.roles[0] !== 'student'">
+        <el-button v-if="$store.getters.roles[0] !== 'student'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-plus">
           Add Group
         </el-button>
       </router-link>
@@ -31,7 +31,7 @@
           <el-button type="primary" size="mini" @click="handleEnter(row.id)">
             Enter
           </el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(row,$index)" v-if="$store.getters.roles[0] !== 'student'">
+          <el-button v-if="$store.getters.roles[0] !== 'student'" size="mini" type="danger" @click="handleDelete(row,$index)">
             Delete
           </el-button>
         </template>
@@ -45,7 +45,7 @@ import { deleteDocument, fetchList } from '@/api/article'
 import { deleteGroup, fetchGroupList } from '@/api/group'
 
 export default {
-  name: 'list',
+  name: 'List',
   data() {
     return {
       tableKey: 0,
@@ -54,17 +54,17 @@ export default {
       creator: '',
       temp: {
         id: undefined,
-        groupName: '',
+        groupName: ''
       }
     }
-  },
-  created() {
-    this.getList()
   },
   watch: {
     $route() {
       this.getList()
     }
+  },
+  created() {
+    this.getList()
   },
   methods: {
     getList() {
@@ -73,7 +73,7 @@ export default {
       })
     },
     handleEnter(id) {
-      this.$router.push('/Groups/index/'+id)
+      this.$router.push('/Groups/index/' + id)
     },
     handleDelete(row, index) {
       this.$confirm('Are you sure you want to delete this group?').then(() => {

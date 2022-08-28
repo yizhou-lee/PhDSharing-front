@@ -29,16 +29,16 @@
             <el-tab-pane label="Info" name="info">
               <el-form>
                 <el-form-item label="Name">
-                  <el-input v-model.trim="user.trueName" :disabled="true"/>
+                  <el-input v-model.trim="user.trueName" :disabled="true" />
                 </el-form-item>
-                <el-form-item label="Sex"><br/>
+                <el-form-item label="Sex"><br>
                   <el-radio-group v-model="user.sex">
-                    <el-radio disabled label="male"></el-radio>
-                    <el-radio disabled label="female"></el-radio>
+                    <el-radio disabled label="male" />
+                    <el-radio disabled label="female" />
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="Email">
-                  <el-input v-model.trim="user.email" :disabled="true"/>
+                  <el-input v-model.trim="user.email" :disabled="true" />
                 </el-form-item>
               </el-form>
             </el-tab-pane>
@@ -55,12 +55,12 @@ import PanThumb from '@/components/PanThumb'
 import { getPersonInfo } from '@/api/group'
 
 export default {
+  name: 'PeopleInfo',
   components: { PanThumb },
-  name: 'peopleInfo',
   data() {
     return {
       user: {},
-      activeTab: 'info',
+      activeTab: 'info'
     }
   },
   created() {
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     fetchInfo() {
-      const userId = this.$route.params.personId;
+      const userId = this.$route.params.personId
       getPersonInfo(userId).then(response => {
         this.user = response.data.person
       })

@@ -3,14 +3,14 @@ import request from '@/utils/request'
 export function fetchMemberList() {
   return request({
     url: '/group/memberList',
-    method: 'get',
+    method: 'get'
   })
 }
 
 export function fetchGroupList() {
   return request({
     url: '/group/groupList',
-    method: 'get',
+    method: 'get'
   })
 }
 
@@ -34,7 +34,7 @@ export function getPeople(groupId) {
   return request({
     url: '/group-member/people',
     method: 'get',
-    params: {groupId}
+    params: { groupId }
   })
 }
 
@@ -42,7 +42,7 @@ export function getPersonInfo(personId) {
   return request({
     url: '/group-member/personInfo',
     method: 'get',
-    params: {personId}
+    params: { personId }
   })
 }
 
@@ -50,7 +50,7 @@ export function getFile(groupId) {
   return request({
     url: '/group-file/getFile',
     method: 'get',
-    params: {groupId}
+    params: { groupId }
   })
 }
 
@@ -58,7 +58,7 @@ export function getFileInfo(fileId, groupId) {
   return request({
     url: '/group-file/getFileInfo',
     method: 'get',
-    params: {fileId, groupId}
+    params: { fileId, groupId }
   })
 }
 
@@ -82,7 +82,7 @@ export function getDiscussion(groupId, title) {
   return request({
     url: '/group-discussion/getDiscussion',
     method: 'get',
-    params: {groupId, title}
+    params: { groupId, title }
   })
 }
 
@@ -106,7 +106,7 @@ export function getDetail(discussionId) {
   return request({
     url: '/group-discussion/getDetail',
     method: 'get',
-    params: {discussionId}
+    params: { discussionId }
   })
 }
 
@@ -114,7 +114,7 @@ export function getComments(discussionId) {
   return request({
     url: '/group-discussion/getComments',
     method: 'get',
-    params: {discussionId}
+    params: { discussionId }
   })
 }
 
@@ -130,6 +130,6 @@ export function deleteComment(commentId) {
   return request({
     url: '/group-discussion/deleteComment',
     method: 'post',
-    params: {commentId}
+    params: { commentId }
   })
 }

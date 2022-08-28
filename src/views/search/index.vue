@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <div class="search_input" style="text-align: center; margin-top: 100px;">
-      <el-image style="width: 150px; height: 150px" :src=logo></el-image>
+      <el-image style="width: 150px; height: 150px" :src="logo" />
       <h1 style="margin-top: 20px">Literature Search</h1>
-      <el-input placeholder="Please enter the content" v-model="searchInput" class="input-with-select" style="width: 60%; font-size: 15px; margin-top: 20px">
-        <el-select v-model="searchWeb" slot="prepend" style="font-size: 15px">
-          <el-option label="Google Scholar" value="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q="></el-option>
-          <el-option label="ScienceDirect" value="https://www.sciencedirect.com/search?qs="></el-option>
-          <el-option label="Baidu Scholar" value="https://xueshu.baidu.com/s?wd="></el-option>
-          <el-option label="Taylor & Francis" value="https://www.tandfonline.com/action/doSearch?AllField="></el-option>
-          <el-option label="Springer" value="https://link.springer.com/search?query="></el-option>
+      <el-input v-model="searchInput" placeholder="Please enter the content" class="input-with-select" style="width: 60%; font-size: 15px; margin-top: 20px">
+        <el-select slot="prepend" v-model="searchWeb" style="font-size: 15px">
+          <el-option label="Google Scholar" value="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=" />
+          <el-option label="ScienceDirect" value="https://www.sciencedirect.com/search?qs=" />
+          <el-option label="Baidu Scholar" value="https://xueshu.baidu.com/s?wd=" />
+          <el-option label="Taylor & Francis" value="https://www.tandfonline.com/action/doSearch?AllField=" />
+          <el-option label="Springer" value="https://link.springer.com/search?query=" />
         </el-select>
-        <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
+        <el-button slot="append" icon="el-icon-search" @click="handleSearch" />
       </el-input>
     </div>
   </div>
@@ -20,7 +20,7 @@
 <script>
 
 export default {
-  name: 'index',
+  name: 'Index',
   data() {
     return {
       searchInput: '',

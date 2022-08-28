@@ -1,66 +1,65 @@
 <template>
- <div class="tab-main" style="margin-right: 20px">
-   <el-card class="box-card">
-     <div slot="header" class="clearfix">
-       <span style="font-size: 20px;">{{ discussion.title }}</span>
-       <router-link :to="{path: 'Edit'}" append>
-         <el-button style="float: right; padding: 3px 0" type="text" v-if="ownDiscussion">Edit</el-button>
-       </router-link>
-       <div>
-         <span style="font-size: 13px;">asked by {{ uploader }}</span>
-       </div>
-     </div>
-     <div class="text item; markdown-body" v-html="discussion.content"></div>
+  <div class="tab-main" style="margin-right: 20px">
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span style="font-size: 20px;">{{ discussion.title }}</span>
+        <router-link :to="{path: 'Edit'}" append>
+          <el-button v-if="ownDiscussion" style="float: right; padding: 3px 0" type="text">Edit</el-button>
+        </router-link>
+        <div>
+          <span style="font-size: 13px;">asked by {{ uploader }}</span>
+        </div>
+      </div>
+      <div class="text item; markdown-body" v-html="discussion.content" />
 
-   </el-card>
-   <el-button style="margin-top: 15px; margin-bottom: 20px" type="primary" @click="showComment = true">Answer this question</el-button>
-   <el-tabs v-model="activeName">
-     <el-tab-pane label="Answers" name="first">
-       <el-form ref="form" :model="form" :rules="rules" style="padding: 5px" v-if="showComment">
-         <el-form-item prop="content">
-           <mavon-editor language="en" v-model="form.content"></mavon-editor>
-         </el-form-item>
-         <el-form-item>
-           <el-button @click="cancelSubmit">Cancel</el-button>
-           <el-button type="primary" @click="onSubmit">Post answer</el-button>
-         </el-form-item>
-       </el-form>
-       <div class="block" style="margin-left: -40px">
-         <el-timeline>
-           <el-timeline-item :timestamp="comment.addedDate" placement="top" v-for="comment in comments">
-             <el-card class="box-answer">
-               <div slot="header" class="clearfix">
-                 <span style="font-weight: bolder">{{ comment.username }}</span>
+    </el-card>
+    <el-button style="margin-top: 15px; margin-bottom: 20px" type="primary" @click="showComment = true">Answer this question</el-button>
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="Answers" name="first">
+        <el-form v-if="showComment" ref="form" :model="form" :rules="rules" style="padding: 5px">
+          <el-form-item prop="content">
+            <mavon-editor v-model="form.content" language="en" />
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="cancelSubmit">Cancel</el-button>
+            <el-button type="primary" @click="onSubmit">Post answer</el-button>
+          </el-form-item>
+        </el-form>
+        <div class="block" style="margin-left: -40px">
+          <el-timeline>
+            <el-timeline-item v-for="comment in comments" :timestamp="comment.addedDate" placement="top">
+              <el-card class="box-answer">
+                <div slot="header" class="clearfix">
+                  <span style="font-weight: bolder">{{ comment.username }}</span>
 
-                 <el-dropdown style="float: right; padding: 3px 0" v-if="comment.username === $store.getters.name || $store.getters.roles[0] !== 'student'">
-                   <span class="el-dropdown-link">
-                      <i class="el-icon-arrow-down el-icon-more" style="font-size: 15px"></i>
-                   </span>
-                   <el-dropdown-menu slot="dropdown">
-                     <el-dropdown-item v-if="comment.username === $store.getters.name" @click.native="editComment(comment)">edit</el-dropdown-item>
-                     <el-dropdown-item @click.native="deleteComment(comment.id)">delete</el-dropdown-item>
-                   </el-dropdown-menu>
-                 </el-dropdown>
-               </div>
-               <div class="text item; markdown-body" v-html="comment.mdcontent"></div>
-             </el-card>
-           </el-timeline-item>
-         </el-timeline>
-       </div>
-     </el-tab-pane>
-   </el-tabs>
+                  <el-dropdown v-if="comment.username === $store.getters.name || $store.getters.roles[0] !== 'student'" style="float: right; padding: 3px 0">
+                    <span class="el-dropdown-link">
+                      <i class="el-icon-arrow-down el-icon-more" style="font-size: 15px" />
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item v-if="comment.username === $store.getters.name" @click.native="editComment(comment)">edit</el-dropdown-item>
+                      <el-dropdown-item @click.native="deleteComment(comment.id)">delete</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </div>
+                <div class="text item; markdown-body" v-html="comment.mdcontent" />
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
 
-
- </div>
+  </div>
 </template>
 
 <script>
 import { addComment, addDiscussion, deleteComment, getComments, getDetail } from '@/api/group'
-import "github-markdown-css"
+import 'github-markdown-css'
 import MarkdownIt from 'markdown-it'
 
 export default {
-  name: 'discussionDetail',
+  name: 'DiscussionDetail',
   data() {
     return {
       discussion: {
@@ -88,20 +87,20 @@ export default {
       showComment: false,
       comments: [],
       ownDiscussion: false,
-      ownComment: false,
+      ownComment: false
     }
   },
   created() {
-    this.fetchDetail();
-    this.fetchComments();
+    this.fetchDetail()
+    this.fetchComments()
   },
   methods: {
     fetchDetail() {
-      const discussionId = this.$route.params.discussionId;
+      const discussionId = this.$route.params.discussionId
       getDetail(discussionId).then(response => {
         this.discussion = response.data.item
         this.uploader = response.data.uploader
-        const MarkdownIt = require("markdown-it")
+        const MarkdownIt = require('markdown-it')
         const md = new MarkdownIt()
         const result = md.render(response.data.item.content)
         this.discussion.content = result
@@ -109,13 +108,13 @@ export default {
       })
     },
     cancelSubmit() {
-      this.showComment = false;
-      this.resetForm();
+      this.showComment = false
+      this.resetForm()
     },
     onSubmit() {
       this.$refs['form'].validate((valid) => {
-        if(valid) {
-          this.form.discussionId = this.$route.params.discussionId;
+        if (valid) {
+          this.form.discussionId = this.$route.params.discussionId
           addComment(this.form).then(() => {
             this.$notify({
               title: 'Success',
@@ -131,10 +130,10 @@ export default {
       })
     },
     fetchComments() {
-      const discussionId = this.$route.params.discussionId;
+      const discussionId = this.$route.params.discussionId
       getComments(discussionId).then(response => {
         this.comments = response.data.comments
-        const MarkdownIt = require("markdown-it")
+        const MarkdownIt = require('markdown-it')
         const md = new MarkdownIt()
         for (let i = 0; i < this.comments.length; i++) {
           this.comments[i].mdcontent = md.render(response.data.comments[i].content)
@@ -142,8 +141,8 @@ export default {
       })
     },
     editComment(comment) {
-      this.showComment = true;
-      this.form = comment;
+      this.showComment = true
+      this.form = comment
     },
     resetForm() {
       this.form = {

@@ -20,27 +20,27 @@
           <span>{{ row.username }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Ture Name" width="150px" >
+      <el-table-column label="Ture Name" width="150px">
         <template slot-scope="{row}">
           <span>{{ row.trueName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Password" width="150px" >
+      <el-table-column label="Password" width="150px">
         <template slot-scope="{row}">
           <span>{{ row.password }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Sex" width="150px" >
+      <el-table-column label="Sex" width="150px">
         <template slot-scope="{row}">
           <span>{{ row.sex }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Email" width="250px" >
+      <el-table-column label="Email" width="250px">
         <template slot-scope="{row}">
           <span>{{ row.email }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Role" width="150px" >
+      <el-table-column label="Role" width="150px">
         <template slot-scope="{row}">
           <span>{{ row.role }}</span>
         </template>
@@ -72,8 +72,8 @@
         </el-form-item>
         <el-form-item label="Sex">
           <el-radio-group v-model="temp.sex">
-            <el-radio label="male"></el-radio>
-            <el-radio label="female"></el-radio>
+            <el-radio label="male" />
+            <el-radio label="female" />
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Email" prop="email">
@@ -81,9 +81,9 @@
         </el-form-item>
         <el-form-item label="Role" prop="role">
           <el-radio-group v-model="temp.role">
-            <el-radio label="admin"></el-radio>
-            <el-radio label="supervisor"></el-radio>
-            <el-radio label="student"></el-radio>
+            <el-radio label="admin" />
+            <el-radio label="supervisor" />
+            <el-radio label="student" />
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -106,7 +106,7 @@ import { createUser, deleteUser, fetchList, updateUser } from '@/api/user'
 import { createDocument, deleteDocument, getPdf, updateDocument } from '@/api/article'
 
 export default {
-  name: 'userManagement',
+  name: 'UserManagement',
   components: { Pagination },
   directives: { waves },
   data() {
@@ -118,7 +118,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        title: '',
+        title: ''
       },
       temp: {
         id: undefined,
@@ -128,7 +128,7 @@ export default {
         password: '',
         trueName: '',
         sex: '',
-        role: '',
+        role: ''
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -140,20 +140,20 @@ export default {
       userRules: {
         username: [
           { required: true, message: 'Username is required', trigger: 'blur' },
-          { min: 2, max: 50, message: 'Username is too short/long', trigger: 'blur'}
+          { min: 2, max: 50, message: 'Username is too short/long', trigger: 'blur' }
         ],
         trueName: [
-          { min: 2, max: 50, message: 'True Name is too short/long', trigger: 'blur'}
+          { min: 2, max: 50, message: 'True Name is too short/long', trigger: 'blur' }
         ],
         password: [
           { required: true, message: 'Password should not be null', trigger: 'blur' },
-          { min: 6, message: "Your password should have at least 6 characters", trigger: 'blur' },
-          { max: 20, message: "Your password should not exceed 20 characters", trigger: 'blur' }
+          { min: 6, message: 'Your password should have at least 6 characters', trigger: 'blur' },
+          { max: 20, message: 'Your password should not exceed 20 characters', trigger: 'blur' }
         ],
         email: [
-          {type: 'email', message: 'Please enter the correct email', trigger: 'blur'}
+          { type: 'email', message: 'Please enter the correct email', trigger: 'blur' }
         ],
-        role: [{ required: true, message: 'You must select a role', trigger: 'blur' },]
+        role: [{ required: true, message: 'You must select a role', trigger: 'blur' }]
       }
     }
   },
@@ -196,7 +196,7 @@ export default {
         password: '',
         trueName: '',
         sex: '',
-        role: '',
+        role: ''
       }
     },
     handleCreate() {
@@ -266,7 +266,7 @@ export default {
           this.getList()
         })
       })
-    },
+    }
   }
 }
 </script>

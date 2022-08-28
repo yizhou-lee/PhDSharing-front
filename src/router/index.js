@@ -134,7 +134,7 @@ export const asyncRoutes = [
         component: () => import('@/views/Files/document-list'),
         name: 'DocumentList',
         meta: { title: 'Document', icon: 'list' }
-      },
+      }
     ]
   },
   {
@@ -147,7 +147,7 @@ export const asyncRoutes = [
         path: 'list',
         component: () => import('@/views/Groups/list'),
         name: 'list',
-        meta: { title: 'Groups', icon: 'peoples'}
+        meta: { title: 'Groups', icon: 'peoples' }
       },
       {
         path: 'add',
@@ -159,7 +159,7 @@ export const asyncRoutes = [
       {
         path: 'index/:id',
         component: () => import('@/views/Groups/index'),
-        redirect: {name: 'people'},
+        redirect: { name: 'people' },
         hidden: true,
         name: 'index',
         meta: { title: 'index' },
@@ -167,37 +167,37 @@ export const asyncRoutes = [
           {
             path: 'people',
             name: 'people',
-            component: () => import('@/views/Groups/people'),
+            component: () => import('@/views/Groups/people')
           },
           {
             path: 'people/:personId',
             name: 'peopleInfo',
-            component: () => import('@/views/Groups/peopleInfo'),
+            component: () => import('@/views/Groups/peopleInfo')
           },
           {
             path: 'discussion',
             name: 'discussion',
-            component: () => import('@/views/Groups/discussion'),
+            component: () => import('@/views/Groups/discussion')
           },
           {
             path: 'file',
             name: 'file',
-            component: () => import('@/views/Groups/file'),
+            component: () => import('@/views/Groups/file')
           },
           {
             path: 'discussion/add',
             name: 'discussionAdd',
-            component: () => import('@/views/Groups/discussionEdit'),
+            component: () => import('@/views/Groups/discussionEdit')
           },
           {
             path: 'discussionDetail/:discussionId',
             name: 'discussionDetail',
-            component: () => import('@/views/Groups/discussionDetail'),
+            component: () => import('@/views/Groups/discussionDetail')
           },
           {
             path: 'discussionDetail/:discussionId/edit',
             name: 'discussionEdit',
-            component: () => import('@/views/Groups/discussionEdit'),
+            component: () => import('@/views/Groups/discussionEdit')
           }
         ]
       }
@@ -214,11 +214,9 @@ export const asyncRoutes = [
         component: () => import('@/views/search/index'),
         name: 'SearchIndex',
         meta: { title: 'Search', icon: 'search' }
-      },
+      }
     ]
   },
-
-
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

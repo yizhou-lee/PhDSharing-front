@@ -8,7 +8,7 @@
               <span>Students</span>
             </div>
             <div v-for="student in studentData" class="text item">
-              <el-link style="font-size: 18px" @click="enterInfo(student.id)">{{student.username}}</el-link>
+              <el-link style="font-size: 18px" @click="enterInfo(student.id)">{{ student.username }}</el-link>
             </div>
           </el-card>
         </div>
@@ -20,7 +20,7 @@
               <span>Supervisors</span>
             </div>
             <div v-for="supervisor in supervisorData" class="text item">
-              <el-link style="font-size: 18px" @click="enterInfo(supervisor.id)">{{supervisor.username}}</el-link>
+              <el-link style="font-size: 18px" @click="enterInfo(supervisor.id)">{{ supervisor.username }}</el-link>
             </div>
           </el-card>
         </div>
@@ -33,11 +33,11 @@
 import { getPeople } from '@/api/group'
 
 export default {
-  name: 'people',
+  name: 'People',
   data() {
     return {
       studentData: [],
-      supervisorData: [],
+      supervisorData: []
     }
   },
   created() {
@@ -45,15 +45,15 @@ export default {
   },
   methods: {
     fetchPeople() {
-      const groupId = this.$route.params.id;
+      const groupId = this.$route.params.id
       getPeople(groupId).then(response => {
         this.studentData = response.data.groupMember
         this.supervisorData = response.data.supervisor
       })
     },
     enterInfo(personId) {
-      const groupId = this.$route.params.id;
-      this.$router.push('/Groups/index/'+groupId+"/people/"+personId);
+      const groupId = this.$route.params.id
+      this.$router.push('/Groups/index/' + groupId + '/people/' + personId)
     }
   }
 }

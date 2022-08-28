@@ -1,26 +1,26 @@
 <template>
   <div class="app-container">
-    <el-tabs tab-position="left" v-model="activeName" @tab-click="handleClick" ref="tabs">
+    <el-tabs ref="tabs" v-model="activeName" tab-position="left" @tab-click="handleClick">
       <el-tab-pane label="People" name="people">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="Discussions" name="discussion">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="Files" name="file">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="DiscussionEdit" name="discussionEdit">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="DiscussionDetail" name="discussionDetail">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="DiscussionAdd" name="discussionAdd">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
       <el-tab-pane label="PersonInfo" name="personInfo">
-        <router-view></router-view>
+        <router-view />
       </el-tab-pane>
 
     </el-tabs>
@@ -36,16 +36,16 @@ import waves from '@/directive/waves'
 import router from '@/router' // secondary package based on el-pagination
 
 export default {
-  name: 'index',
+  name: 'Index',
   data() {
     return {
-      activeName: 'people',
+      activeName: 'people'
     }
   },
   created: function() {
-    if(this.$route.name === 'peopleInfo' || this.$route.name === 'people') {
+    if (this.$route.name === 'peopleInfo' || this.$route.name === 'people') {
       this.activeName = 'people'
-    } else if(this.$route.name === 'file') {
+    } else if (this.$route.name === 'file') {
       this.activeName = 'file'
     } else {
       this.activeName = 'discussion'
@@ -54,9 +54,9 @@ export default {
   },
   methods: {
     handleClick(tab) {
-      const groupId = this.$route.params.id;
-      this.activeName = tab.name;
-      this.$router.push('/Groups/index/'+groupId+"/"+tab.name);
+      const groupId = this.$route.params.id
+      this.activeName = tab.name
+      this.$router.push('/Groups/index/' + groupId + '/' + tab.name)
     },
     hideTabs() {
       this.$nextTick(function() {

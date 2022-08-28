@@ -4,7 +4,7 @@ export function fetchList(title) {
   return request({
     url: '/document/list',
     method: 'get',
-    params: {title}
+    params: { title }
   })
 }
 
@@ -52,7 +52,7 @@ export function getPdf(pdfId) {
   return request({
     url: '/pdf/get',
     method: 'get',
-    params: {pdfId}
+    params: { pdfId }
   })
 }
 
@@ -60,6 +60,6 @@ export function deletePdf(pdfId) {
   return request({
     url: '/pdf/delete',
     method: 'post',
-    params: {pdfId}
+    params: { pdfId }
   })
 }

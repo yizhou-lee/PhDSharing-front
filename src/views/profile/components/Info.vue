@@ -3,10 +3,10 @@
     <el-form-item label="Name" prop="name">
       <el-input v-model="user.trueName" />
     </el-form-item>
-    <el-form-item label="Sex" prop="sex"><br/>
+    <el-form-item label="Sex" prop="sex"><br>
       <el-radio-group v-model="user.sex">
-        <el-radio label="male"></el-radio>
-        <el-radio label="female"></el-radio>
+        <el-radio label="male" />
+        <el-radio label="female" />
       </el-radio-group>
     </el-form-item>
     <el-form-item label="Email" prop="email">
@@ -27,8 +27,8 @@ export default {
       user: {},
       rules: {
         name: [
-          { required: true, message: 'You need to enter your true name', trigger: 'blur'},
-          { min: 1, max: 50, message: 'Name is too long', trigger: 'blur'}
+          { required: true, message: 'You need to enter your true name', trigger: 'blur' },
+          { min: 1, max: 50, message: 'Name is too long', trigger: 'blur' }
         ],
         sex: [],
         email: []

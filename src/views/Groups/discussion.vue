@@ -33,7 +33,7 @@
           <el-button type="primary" size="mini" @click="handleEnter(row.id)">
             Enter
           </el-button>
-          <el-button size="mini" type="danger" @click="deleteDiscussion(row,$index)" v-if="row.userId === $store.getters.id || $store.getters.roles[0] !== 'student'">
+          <el-button v-if="row.userId === $store.getters.id || $store.getters.roles[0] !== 'student'" size="mini" type="danger" @click="deleteDiscussion(row,$index)">
             Delete
           </el-button>
         </template>
@@ -51,7 +51,7 @@ import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 
 export default {
-  name: 'discussion',
+  name: 'Discussion',
   components: { Pagination },
   directives: { waves },
   data() {
@@ -71,8 +71,8 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        title: '',
-      },
+        title: ''
+      }
     }
   },
   computed: {
@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     fetchDiscussion() {
-      const groupId = this.$route.params.id;
+      const groupId = this.$route.params.id
       getDiscussion(groupId, this.listQuery.title).then(response => {
         this.discussionList = response.data.items
         this.total = response.data.total
@@ -97,11 +97,11 @@ export default {
     },
     handleFilter() {
       this.listQuery.page = 1
-      this.fetchDiscussion();
+      this.fetchDiscussion()
     },
     handleEnter(discussionId) {
-      const groupId = this.$route.params.id;
-      this.$router.push('/Groups/index/'+groupId+"/discussionDetail/"+discussionId);
+      const groupId = this.$route.params.id
+      this.$router.push('/Groups/index/' + groupId + '/discussionDetail/' + discussionId)
     },
     deleteDiscussion(row, index) {
       this.$confirm('Are you sure you want to delete this discussion?').then(() => {

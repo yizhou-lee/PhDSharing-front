@@ -10,7 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: '/info',  //'/phd-sharing-front/user/info',
+    url: '/info', // '/phd-sharing-front/user/info',
     method: 'get',
     params: { token }
   })
@@ -18,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/logout',  //'/phd-sharing-front/user/logout',
+    url: '/logout', // '/phd-sharing-front/user/logout',
     method: 'post'
   })
 }
@@ -43,7 +43,7 @@ export function updatePassword(password) {
   return request({
     url: '/user/updatePassword',
     method: 'post',
-    params: {password}
+    params: { password }
   })
 }
 
@@ -51,7 +51,7 @@ export function fetchList(username) {
   return request({
     url: '/user/list',
     method: 'get',
-    params: {username}
+    params: { username }
   })
 }
 

@@ -30,10 +30,10 @@
                 <el-form-item label="Name" prop="trueName">
                   <el-input v-model="user.trueName" />
                 </el-form-item>
-                <el-form-item label="Sex"><br/>
+                <el-form-item label="Sex"><br>
                   <el-radio-group v-model="user.sex">
-                    <el-radio label="male"></el-radio>
-                    <el-radio label="female"></el-radio>
+                    <el-radio label="male" />
+                    <el-radio label="female" />
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="Email" prop="email">
@@ -48,10 +48,10 @@
             <el-tab-pane label="Account" name="account">
               <el-form ref="accountForm" :rules="accountRules" :model="account">
                 <el-form-item label="New Password" prop="newPassword">
-                  <el-input v-model="account.newPassword" placeholder="Please enter the new password" type="password"/>
+                  <el-input v-model="account.newPassword" placeholder="Please enter the new password" type="password" />
                 </el-form-item>
                 <el-form-item label="Confirm New Password" prop="rePassword">
-                  <el-input v-model="account.rePassword" placeholder="Please confirm the new password" type="password"/>
+                  <el-input v-model="account.rePassword" placeholder="Please confirm the new password" type="password" />
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="accountSubmit">Update</el-button>
@@ -74,7 +74,7 @@ import { resetRouter } from '@/router'
 
 export default {
   name: 'Profile',
-  components: {PanThumb},
+  components: { PanThumb },
   data() {
     const confirmPassword = (rule, value, cb) => {
       if (this.account.newPassword !== value) {
@@ -91,21 +91,21 @@ export default {
       activeTab: 'info',
       account: {
         newPassword: '',
-        rePassword: '',
+        rePassword: ''
       },
       infoRules: {
         trueName: [
-          { min: 1, max: 50, message: 'Name is too long', trigger: 'blur'}
+          { min: 1, max: 50, message: 'Name is too long', trigger: 'blur' }
         ],
-        email: [{type: 'email', message: 'Please enter the correct email', trigger: 'blur'}]
+        email: [{ type: 'email', message: 'Please enter the correct email', trigger: 'blur' }]
       },
       accountRules: {
         newPassword: [
           { required: true, message: 'Password should not be null', trigger: 'change' },
-          { min: 6, message: "Your password should have at least 6 characters", trigger: 'blur' },
-          { max: 20, message: "Your password should not exceed 20 characters", trigger: 'blur' }
+          { min: 6, message: 'Your password should have at least 6 characters', trigger: 'blur' },
+          { max: 20, message: 'Your password should not exceed 20 characters', trigger: 'blur' }
         ],
-        rePassword: {validator: confirmPassword, trigger: 'blur'}
+        rePassword: { validator: confirmPassword, trigger: 'blur' }
       }
     }
   },
